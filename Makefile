@@ -8,5 +8,8 @@ help:
 run: ## Run the Python main entry point.
 	uv run src/main.py
 	
+pytest: ## Run the Python tests.
+	uv run pytest
+
 ruff: ## Run ruff as a linter.
 	uv run ruff check src/
