@@ -1,5 +1,6 @@
 import re
 
+
 def print_preview(file):
     with open(file, "r") as f:
         raw_text = f.read()
@@ -18,12 +19,13 @@ def print_preview(file):
         print("=========================================================")
         print(f"""Preview: {list(vocabulary.items())[:10]}""")
 
+
 def basic_tokenizer(text: str) -> list[str]:
-    """Simple tokenizer that splits text into tokens. 
-    
-    Args: 
+    """Simple tokenizer that splits text into tokens.
+
+    Args:
         text (str): The text to tokenize.
-    
+
     Returns:
         list[str]: A list of whitespace-free tokens.
     """
@@ -31,14 +33,16 @@ def basic_tokenizer(text: str) -> list[str]:
 
     return [token for token in result if token.strip()]
 
+
 def create_vocabulary(preprocessed: list[str]) -> list[str]:
     all_tokens = sorted(set(preprocessed))
 
     return {token: i for i, token in enumerate(all_tokens)}
 
+
 def main():
     print_preview("data/the-verdict.txt")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
