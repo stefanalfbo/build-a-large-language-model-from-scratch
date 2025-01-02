@@ -11,5 +11,11 @@ run: ## Run the Python main entry point.
 pytest: ## Run the Python tests.
 	uv run pytest
 
-ruff: ## Run ruff as a linter.
-	uv run ruff check src/
+linter: ## Run ruff as a linter.
+	uv run ruff check .
+
+format: ## Run ruff format to format the code.
+	uv run ruff format .
+
+isort: ## Run ruff to sort the imports.
+	uv run ruff check --select I --fix .   
