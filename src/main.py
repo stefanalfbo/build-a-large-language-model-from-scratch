@@ -3,10 +3,15 @@ import re
 def print_preview(file):
     with open(file, "r") as f:
         raw_text = f.read()
+        preprocessed = basic_tokenizer(raw_text)
 
         print(f"""Total number of characters: {len(raw_text):,}""")
         print("=========================================================")
-        print(raw_text[:99])
+        print(f"""Preview: {raw_text[:99]}""")
+        print()
+        print(f"""Total number of tokens: {len(preprocessed):,}""")
+        print("=========================================================")
+        print(f"""Preview: {preprocessed[:30]}""")
 
 def basic_tokenizer(text: str) -> list[str]:
     """Simple tokenizer that splits text into tokens. 
