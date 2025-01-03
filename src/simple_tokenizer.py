@@ -17,6 +17,7 @@ def basic_tokenizer(text: str) -> list[str]:
 
 def create_vocabulary(preprocessed: list[str]) -> list[str]:
     all_tokens = sorted(set(preprocessed))
+    all_tokens.extend(["<|endoftext|>", "<|unknown|>"])
 
     return {token: i for i, token in enumerate(all_tokens)}
 
@@ -50,3 +51,7 @@ class SimpleTokenizerV1:
         text = " ".join([self.int_to_str[i] for i in ids])
 
         return re.sub(r'\s+([,.?!"()\'])', r"\1", text)
+
+
+class SimpleTokenizerV2:
+    pass

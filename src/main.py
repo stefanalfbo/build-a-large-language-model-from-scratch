@@ -1,4 +1,4 @@
-import re
+from simple_tokenizer import basic_tokenizer, create_vocabulary
 
 
 def print_preview(file):
@@ -17,27 +17,8 @@ def print_preview(file):
         print()
         print(f"""Vocabulary size: {len(vocabulary):,}""")
         print("=========================================================")
-        print(f"""Preview: {list(vocabulary.items())[:10]}""")
-
-
-def basic_tokenizer(text: str) -> list[str]:
-    """Simple tokenizer that splits text into tokens.
-
-    Args:
-        text (str): The text to tokenize.
-
-    Returns:
-        list[str]: A list of whitespace-free tokens.
-    """
-    result = re.split(r'([,.:;?_!"()\']|--|\s)', text)
-
-    return [token for token in result if token.strip()]
-
-
-def create_vocabulary(preprocessed: list[str]) -> list[str]:
-    all_tokens = sorted(set(preprocessed))
-
-    return {token: i for i, token in enumerate(all_tokens)}
+        print(f"""Preview, first 5: {list(vocabulary.items())[:5]}""")
+        print(f"""Preview, last 5: {list(vocabulary.items())[-5:]}""")
 
 
 def main():

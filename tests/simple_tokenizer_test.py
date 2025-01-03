@@ -34,6 +34,8 @@ def test_create_vocabulary():
         "test": 7,
         "this": 8,
         "world": 9,
+        "<|endoftext|>": 10,
+        "<|unknown|>": 11,
     }
 
     # Act
