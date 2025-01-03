@@ -2,6 +2,7 @@ import pytest
 
 from src.simple_tokenizer import (
     SimpleTokenizerV1,
+    SimpleTokenizerV2,
     basic_tokenizer,
     create_vocabulary,
     the_verdict_vocabulary,
@@ -129,3 +130,53 @@ def test_SimpleTokenizerV1_key_error():
     # Act & Assert
     with pytest.raises(KeyError):
         _ = tokenizer.encode(text)
+
+
+def test_SimpleTokenizerV2_endoftext():
+    # Arrange
+    expected = [
+        1131,
+        5,
+        355,
+        1126,
+        628,
+        975,
+        10,
+        1130,
+        55,
+        988,
+        956,
+        984,
+        722,
+        988,
+        1131,
+        7,
+    ]
+    vocabulary = the_verdict_vocabulary()
+    tokenizer = SimpleTokenizerV2(vocabulary)
+    text1 = "Hello, do you like tea?"
+    text2 = "In the sunlit terraces of the palace."
+    text = " <|endoftext|> ".join([text1, text2])
+
+    # Act
+    ids = tokenizer.encode(text)
+
+    # Assert
+    assert ids == expected
+
+
+def test_SimpleTokenizerV2_encode_decode():
+    # Arrange
+    expected = "<|unknown|>, do you like tea? <|endoftext|> In the sunlit terraces of the <|unknown|>."
+    vocabulary = the_verdict_vocabulary()
+    tokenizer = SimpleTokenizerV2(vocabulary)
+    text1 = "Hello, do you like tea?"
+    text2 = "In the sunlit terraces of the palace."
+    text = " <|endoftext|> ".join([text1, text2])
+
+    # Act
+    ids = tokenizer.encode(text)
+    decoded = tokenizer.decode(ids)
+
+    # Assert
+    assert decoded == expected

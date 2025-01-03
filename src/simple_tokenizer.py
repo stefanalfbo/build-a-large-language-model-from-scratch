@@ -54,4 +54,31 @@ class SimpleTokenizerV1:
 
 
 class SimpleTokenizerV2:
-    pass
+    """
+    Tokenizes and detokenizes a string using a simple vocabulary, including
+    special tokens, <|endoftext|> and <|unknown|>."""
+
+    def __init__(self, vocabulary: dict[str, int]):
+        # For simple access in the encode and decode methods
+        self.str_to_int = vocabulary
+        # The inverse of the vocabulary
+        self.int_to_str = {i: s for s, i in vocabulary.items()}
+
+    def encode(self, text: str) -> list[int]:
+        """Encodes a string into a list of token IDs."""
+        result = re.split(r'([,.:;?_!"()\']|--|\s)', text)
+
+        preprocessed = [token.strip() for token in result if token.strip()]
+        # replace tokens not in the vocabulary with <|unknown|>
+        preprocessed = [
+            token if token in self.str_to_int else "<|unknown|>"
+            for token in preprocessed
+        ]
+
+        return [self.str_to_int[token] for token in preprocessed]
+
+    def decode(self, ids: list[int]) -> str:
+        """Decodes a list of token IDs into a string."""
+        text = " ".join([self.int_to_str[i] for i in ids])
+
+        return re.sub(r'\s+([,.:;?!"()\'])', r"\1", text)
