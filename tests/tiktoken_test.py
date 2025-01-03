@@ -39,3 +39,23 @@ def test_tiktoken():
     # Assert
     assert ids == expected_ids
     assert strings == expected_strings
+
+
+def test_unknown_token():
+    # Arrange
+    unknown_words = "Akwirw ier"
+    tokenizer = tiktoken.get_encoding("gpt2")
+
+    # Act
+    ids = tokenizer.encode(unknown_words)
+    text = tokenizer.decode(ids)
+
+    # Assert
+    assert ids == [33901, 86, 343, 86, 220, 959]
+    assert tokenizer.decode([33901]) == "Ak"
+    assert tokenizer.decode([86]) == "w"
+    assert tokenizer.decode([343]) == "ir"
+    assert tokenizer.decode([86]) == "w"
+    assert tokenizer.decode([220]) == " "
+    assert tokenizer.decode([959]) == "ier"
+    assert text == unknown_words
