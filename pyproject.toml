@@ -4,7 +4,9 @@ version = "0.42.0"
 description = "This repository is based on the material from the book Build a Large Language Model (From Scratch)"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "tiktoken==0.7.0",
+]
 
 [dependency-groups]
 dev = [

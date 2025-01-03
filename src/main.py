@@ -1,3 +1,5 @@
+from importlib.metadata import version
+
 from simple_tokenizer import basic_tokenizer, create_vocabulary
 
 
@@ -21,7 +23,15 @@ def print_preview(file):
         print(f"""Preview, last 5: {list(vocabulary.items())[-5:]}""")
 
 
+def print_tiktoken_version():
+    print("=========================================================")
+    print(f"""tiktoken version: {version("tiktoken")}""")
+    print("=========================================================")
+    print()
+
+
 def main():
+    print_tiktoken_version()
     print_preview("data/the-verdict.txt")
 
 
