@@ -1,3 +1,5 @@
+import pytest
+
 from src.simple_tokenizer import (
     SimpleTokenizerV1,
     basic_tokenizer,
@@ -41,7 +43,7 @@ def test_create_vocabulary():
     assert vocabulary == expected
 
 
-def test_basic_tokenizer_encode():
+def test_SimpleTokenizerV1_encode():
     # Arrange
     expected = [
         1,
@@ -77,7 +79,7 @@ def test_basic_tokenizer_encode():
     assert ids == expected
 
 
-def test_basic_tokenizer_decode():
+def test_SimpleTokenizerV1_decode():
     # Arrange
     expected = """" It' s the last he painted, you know," Mrs. Gisburn said with pardonable pride."""
     vocabulary = the_verdict_vocabulary()
@@ -111,3 +113,17 @@ def test_basic_tokenizer_decode():
 
     # Assert
     assert text == expected
+
+
+def test_SimpleTokenizerV1_key_error():
+    """The problem is that the word "Hello" was not used in the "The Verdict" short
+    story. Hence, it is not in the vocabulary."""
+
+    # Arrange
+    vocabulary = the_verdict_vocabulary()
+    tokenizer = SimpleTokenizerV1(vocabulary)
+    text = "Hello, do you like tea?"
+
+    # Act & Assert
+    with pytest.raises(KeyError):
+        _ = tokenizer.encode(text)
