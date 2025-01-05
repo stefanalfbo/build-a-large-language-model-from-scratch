@@ -1,7 +1,7 @@
 from importlib.metadata import version
 
-from simple_tokenizer import basic_tokenizer, create_vocabulary
 from data_loader import simulate_sliding_window
+from simple_tokenizer import basic_tokenizer, create_vocabulary
 
 
 def print_preview(file):
