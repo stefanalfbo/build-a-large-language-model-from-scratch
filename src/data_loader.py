@@ -73,3 +73,35 @@ def create_dataloader_v1(
         drop_last=drop_last,
         num_workers=num_workers,
     )
+
+
+def embedding_vector_conversion(raw_text, vocabulary, output_dimensions):
+    token_embedding_layer = torch.nn.Embedding(len(vocabulary), output_dimensions)
+
+    max_length = 4
+
+    # Create a dataloader and sample each batch
+    dataloader = create_dataloader_v1(
+        raw_text, batch_size=8, max_length=max_length, stride=max_length, shuffle=False
+    )
+    data_iter = iter(dataloader)
+    inputs, _ = next(data_iter)
+
+    # Use the embedding layer to convert token ids to embedding vectors
+    token_embeddings = token_embedding_layer(inputs)
+
+    # For a GPT model’s absolute embedding approach, we just need
+    # to create another embedding layer that has the same embedding
+    # dimension as the token_embedding_layer.
+
+    # The context_length is a variable that represents the supported
+    # input size of the LLM
+    context_length = max_length
+    pos_embedding_layer = torch.nn.Embedding(context_length, output_dimensions)
+    pos_embeddings = pos_embedding_layer(torch.arange(context_length))
+
+    # The positional embedding tensor consists of four 256-dimensional
+    # vectors. We can now add these directly to the token embeddings
+    input_embeddings = token_embeddings + pos_embeddings
+
+    return input_embeddings

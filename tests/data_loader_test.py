@@ -65,9 +65,10 @@ def test_create_dataloader_with_max_length_8_stride_2():
     # Assert
     assert torch.equal(first_batch[0], expected_input_token_ids)
 
+
 def test_token_id_to_embedding_vector_conversion():
-    input_ids = torch.tensor([2,3,5,1])
-    expected = torch.tensor([[-0.4015,  0.9666, -1.1481]])
+    input_ids = torch.tensor([2, 3, 5, 1])
+    expected = torch.tensor([[-0.4015, 0.9666, -1.1481]])
     vocabulary_size = 6
     output_dimensions = 3
 
@@ -99,6 +100,3 @@ def test_token_id_to_embedding_vector_conversion():
     #     [ 0.9178,  1.5810,  1.3010]
     # ]
     assert result.shape == (4, 3)
-
-
-
