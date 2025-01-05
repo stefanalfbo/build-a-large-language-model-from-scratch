@@ -5,6 +5,7 @@ description = "This repository is based on the material from the book Build a La
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "numpy>=2.2.1",
     "tiktoken==0.7.0",
     "torch>=2.5.1",
 ]
