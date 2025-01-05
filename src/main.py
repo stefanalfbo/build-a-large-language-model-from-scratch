@@ -1,6 +1,7 @@
 from importlib.metadata import version
 
 from simple_tokenizer import basic_tokenizer, create_vocabulary
+from data_loader import simulate_sliding_window
 
 
 def print_preview(file):
@@ -33,6 +34,7 @@ def print_tiktoken_version():
 def main():
     print_tiktoken_version()
     print_preview("data/the-verdict.txt")
+    simulate_sliding_window()
 
 
 if __name__ == "__main__":
