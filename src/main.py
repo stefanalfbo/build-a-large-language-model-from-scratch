@@ -24,15 +24,16 @@ def print_preview(file):
         print(f"""Preview, last 5: {list(vocabulary.items())[-5:]}""")
 
 
-def print_tiktoken_version():
+def print_dependencies():
     print("=========================================================")
     print(f"""tiktoken version: {version("tiktoken")}""")
+    print(f"""pytoch   version: {version("torch")}""")
     print("=========================================================")
     print()
 
 
 def main():
-    print_tiktoken_version()
+    print_dependencies()
     print_preview("data/the-verdict.txt")
     simulate_sliding_window()
 

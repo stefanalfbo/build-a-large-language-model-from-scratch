@@ -19,3 +19,4 @@ by Generative Pre-Training](https://cdn.openai.com/research-covers/language-unsu
 ## Dependencies
 
 * [tiktoken](https://github.com/openai/tiktoken) - which is a fast BPE (byte pair encoding) tokenizer.
+* [PyTorch](https://pytorch.org/) - an open-source machine learning library.
