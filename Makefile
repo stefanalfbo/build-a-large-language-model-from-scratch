@@ -1,9 +1,12 @@
 SHELL := /bin/bash
 
-.PHONY: help
+.PHONY: help download-verdict
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(firstword $(MAKEFILE_LIST)) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
+
+download-verdict: ## Download the the-verdict.txt dataset.
+	uv run data/get_the_verdict_file.py
 
 sync: ## Sync the dependencies.
 	uv sync
